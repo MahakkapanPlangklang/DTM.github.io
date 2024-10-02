@@ -78,8 +78,22 @@
             transition: background-color 0.3s, box-shadow 0.3s;
         }
 
+        /* ปุ่มไปหน้า dataset */
+        .dataset-btn {
+            background-color: #42a5f5;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
         /* เปลี่ยนสีปุ่มเมื่อ hover */
-        input[type="submit"]:hover {
+        input[type="submit"]:hover, .dataset-btn:hover {
             background-color: #87e078;
             box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
         }
@@ -137,6 +151,8 @@
             <input type="text" name="age" placeholder="Age">
             <input type="submit" value="Predict">
         </form>
+        <br>
+        <a href="/dataset" class="dataset-btn">View Dataset</a>
 
         {% if prediction_text %}
         <div class="result">
