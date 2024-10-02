@@ -2,98 +2,108 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetes Dataset</title>
+    <meta charset="UTF-8"> <!-- กำหนดการเข้ารหัสของไฟล์เป็น UTF-8 เพื่อรองรับภาษาและอักขระพิเศษ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- กำหนดให้หน้าเว็บปรับการแสดงผลตามขนาดหน้าจออุปกรณ์ -->
+    <title>Diabetes Dataset</title> <!-- กำหนดชื่อของหน้าเว็บเป็น 'Diabetes Dataset' -->
+
     <style>
-        /* ตกแต่งพื้นหลัง */
+        /* ตกแต่งพื้นหลังของหน้าเว็บ */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #42a5f5 100%);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            font-family: 'Arial', sans-serif; /* ตั้งค่าให้ใช้ฟอนต์ Arial */
+            background: linear-gradient(135deg, #ffffff 0%, #42a5f5 100%); /* กำหนดพื้นหลังแบบไล่สีจากสีขาวไปสีน้ำเงิน */
+            margin: 0; /* กำหนด margin ให้เป็น 0 เพื่อลบขอบเริ่มต้น */
+            padding: 20px; /* เพิ่ม padding รอบตัวเนื้อหา */
+            display: flex; /* ใช้ Flexbox เพื่อจัดวางองค์ประกอบภายในหน้าเว็บ */
+            justify-content: center; /* จัดให้เนื้อหาอยู่ตรงกลางในแนวนอน */
+            align-items: flex-start; /* จัดให้เนื้อหาเริ่มจากด้านบนของหน้า */
+            min-height: 100vh; /* ตั้งค่าความสูงอย่างน้อย 100% ของหน้าจอ */
         }
 
-        /* ตกแต่งกล่องข้อมูล */
+        /* ตกแต่งกล่องข้อมูลที่แสดง Dataset */
         .container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 1200px; /* ขยายความกว้างของ container */
-            border: 3px solid #42a5f5;
-            text-align: center;
+            background-color: white; /* กำหนดพื้นหลังของกล่องเป็นสีขาว */
+            border-radius: 12px; /* ปรับขอบกล่องให้โค้งมน */
+            padding: 20px; /* เพิ่ม padding ภายในกล่อง */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงาให้กล่องเพื่อสร้างความลึก */
+            width: 100%; /* กำหนดความกว้างของกล่องให้เต็มพื้นที่ */
+            max-width: 1200px; /* กำหนดความกว้างสูงสุดของกล่องไม่เกิน 1200px */
+            border: 3px solid #42a5f5; /* เพิ่มขอบสีน้ำเงินรอบกล่อง */
+            text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
         }
 
+        /* ตกแต่งหัวข้อของหน้า */
         h1 {
-            color: #42a5f5;
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #42a5f5; /* กำหนดสีตัวอักษรของหัวข้อเป็นสีน้ำเงิน */
+            font-size: 28px; /* ตั้งขนาดตัวอักษร */
+            margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่างของหัวข้อ */
+            font-weight: bold; /* ทำให้ตัวอักษรหนา */
+            text-transform: uppercase; /* เปลี่ยนข้อความในหัวข้อให้เป็นตัวพิมพ์ใหญ่ทั้งหมด */
+            letter-spacing: 1px; /* เพิ่มช่องว่างระหว่างตัวอักษร */
         }
 
-        /* ตาราง */
+        /* ตกแต่งตารางที่แสดง Dataset */
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            width: 100%; /* กำหนดความกว้างของตารางให้เต็ม */
+            border-collapse: collapse; /* ทำให้ขอบตารางติดกัน */
+            margin-top: 20px; /* เพิ่มช่องว่างด้านบนของตาราง */
         }
 
+        /* กำหนดขอบของตาราง, หัวตาราง และข้อมูล */
         table, th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #ddd; /* กำหนดขอบของตารางเป็นสีเทาอ่อน */
         }
 
+        /* ตกแต่งหัวข้อของตาราง */
         th {
-            background-color: #42a5f5;
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
+            background-color: #42a5f5; /* กำหนดสีพื้นหลังของหัวตารางเป็นสีน้ำเงิน */
+            color: white; /* กำหนดสีตัวอักษรเป็นสีขาว */
+            padding: 12px; /* เพิ่ม padding ให้กับหัวตาราง */
+            text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+            font-weight: bold; /* ทำตัวอักษรหนา */
+            text-transform: uppercase; /* เปลี่ยนข้อความในหัวตารางเป็นตัวพิมพ์ใหญ่ทั้งหมด */
         }
 
+        /* ตกแต่งเซลล์ข้อมูล */
         td {
-            padding: 10px;
-            text-align: center;
+            padding: 10px; /* เพิ่ม padding ให้กับเซลล์ข้อมูล */
+            text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
         }
 
-        /* Responsive Design */
+        /* การตอบสนอง (Responsive Design) สำหรับหน้าจอขนาดกลาง */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 15px; /* ลด padding ของ container */
             }
 
             table, th, td {
-                font-size: 14px;
+                font-size: 14px; /* ลดขนาดตัวอักษรในตาราง */
             }
 
             th, td {
-                padding: 8px;
+                padding: 8px; /* ลดขนาด padding ในหัวตารางและเซลล์ข้อมูล */
             }
         }
 
+        /* การตอบสนอง (Responsive Design) สำหรับหน้าจอขนาดเล็ก */
         @media (max-width: 480px) {
             table, th, td {
-                font-size: 12px;
+                font-size: 12px; /* ลดขนาดตัวอักษรในตารางลงอีกเมื่อหน้าจอเล็กมาก */
             }
 
             th, td {
-                padding: 6px;
+                padding: 6px; /* ลดขนาด padding ให้เล็กลงในหน้าจอขนาดเล็ก */
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- กล่องข้อมูลที่แสดง Dataset -->
     <div class="container">
+        <!-- หัวข้อของหน้า -->
         <h1>Diabetes Dataset</h1>
+
+        <!-- แสดงตารางที่มาจากตัวแปร data_table ที่ถูกส่งมาจาก backend -->
         {{ data_table | safe }}
     </div>
 </body>

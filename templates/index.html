@@ -2,161 +2,178 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetes Prediction</title>
+    <meta charset="UTF-8"> <!-- กำหนดการเข้ารหัสของไฟล์เป็น UTF-8 เพื่อรองรับภาษาและอักขระพิเศษ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- กำหนดให้หน้าเว็บปรับการแสดงผลตามขนาดหน้าจออุปกรณ์ -->
+    <title>Diabetes Prediction</title> <!-- กำหนดชื่อหน้าเว็บ -->
+
     <style>
-        /* ตกแต่งพื้นหลัง */
+        /* ตกแต่งพื้นหลังของหน้าเว็บ */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #42a5f5 100%);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 120vh;
+            font-family: 'Arial', sans-serif; /* เลือกฟอนต์ Arial */
+            background: linear-gradient(135deg, #ffffff 0%, #42a5f5 100%); /* กำหนดพื้นหลังแบบไล่สีจากขาวไปน้ำเงิน */
+            margin: 0; /* ตั้งค่า margin ให้เป็น 0 เพื่อไม่ให้มีขอบ */
+            padding: 0; /* ตั้งค่า padding ให้เป็น 0 */
+            display: flex; /* ใช้ Flexbox เพื่อจัดวางองค์ประกอบภายใน */
+            justify-content: center; /* จัดให้องค์ประกอบอยู่กลางหน้าจอในแนวนอน */
+            align-items: center; /* จัดให้องค์ประกอบอยู่กลางหน้าจอในแนวตั้ง */
+            height: 120vh; /* ตั้งความสูงของ body ให้สูงกว่าหน้าจอเล็กน้อยเพื่อความสวยงาม */
         }
 
         /* ตกแต่งกล่องฟอร์ม */
         .container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 500px; /* กำหนดความกว้างสูงสุด */
-            text-align: center;
-            border: 3px solid #42a5f5;
+            background-color: white; /* กำหนดพื้นหลังของกล่องเป็นสีขาว */
+            border-radius: 12px; /* ปรับขอบมุมของกล่องให้โค้งมน */
+            padding: 30px; /* เพิ่มช่องว่างภายในกล่อง */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงาให้กล่องเพื่อความลึก */
+            width: 100%; /* ตั้งความกว้างเต็มหน้าจอ */
+            max-width: 500px; /* กำหนดความกว้างสูงสุดของกล่องไม่ให้เกิน 500px */
+            text-align: center; /* จัดข้อความทั้งหมดในกล่องให้อยู่ตรงกลาง */
+            border: 3px solid #42a5f5; /* เพิ่มขอบสีน้ำเงินรอบกล่อง */
         }
 
         /* ตกแต่งหัวข้อ */
         h1 {
-            color: #42a5f5;
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #42a5f5; /* กำหนดสีตัวอักษรของหัวข้อเป็นสีน้ำเงิน */
+            font-size: 28px; /* ตั้งขนาดตัวอักษร */
+            margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่างของหัวข้อ */
+            font-weight: bold; /* ทำให้ตัวอักษรหนา */
+            text-transform: uppercase; /* เปลี่ยนข้อความในหัวข้อให้เป็นตัวพิมพ์ใหญ่ทั้งหมด */
+            letter-spacing: 1px; /* เพิ่มช่องว่างระหว่างตัวอักษร */
         }
 
         /* การจัดการฟอร์ม */
         form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; /* ใช้ Flexbox เพื่อจัดการฟอร์ม */
+            flex-direction: column; /* จัดการองค์ประกอบให้เป็นแนวตั้ง */
+            align-items: center; /* จัดองค์ประกอบในฟอร์มให้อยู่ตรงกลาง */
         }
 
-        /* ช่องกรอกข้อมูล */
+        /* ตกแต่งช่องกรอกข้อมูล */
         input[type="text"] {
-            width: 100%;
-            max-width: 400px; /* จำกัดความกว้างของช่องกรอกข้อมูล */
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 2px solid #bbb;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%; /* ตั้งความกว้างของช่องกรอกข้อมูลให้เต็ม */
+            max-width: 400px; /* จำกัดความกว้างสูงสุดของช่องกรอกข้อมูล */
+            padding: 12px; /* เพิ่ม padding เพื่อให้ช่องกว้างขึ้น */
+            margin: 10px 0; /* เพิ่มช่องว่างด้านบนและล่าง */
+            border-radius: 8px; /* ปรับขอบของช่องกรอกข้อมูลให้โค้งมน */
+            border: 2px solid #bbb; /* กำหนดขอบเป็นสีเทาอ่อน */
+            font-size: 16px; /* ตั้งขนาดตัวอักษรภายในช่องกรอกข้อมูล */
+            transition: border-color 0.3s, box-shadow 0.3s; /* เพิ่ม transition เมื่อมีการโฟกัสที่ช่องกรอกข้อมูล */
         }
 
-        /* เปลี่ยนสีเส้นขอบเมื่อโฟกัส */
+        /* เปลี่ยนสีเส้นขอบและเพิ่มเงาเมื่อช่องกรอกข้อมูลถูกโฟกัส */
         input[type="text"]:focus {
-            border-color: #42a5f5;
-            box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
+            border-color: #42a5f5; /* เปลี่ยนสีเส้นขอบเป็นสีน้ำเงินเมื่อโฟกัส */
+            box-shadow: 0 0 8px rgba(66, 165, 245, 0.5); /* เพิ่มเงารอบช่องกรอกข้อมูล */
         }
 
-        /* ปุ่มกด */
+        /* ตกแต่งปุ่มส่งฟอร์ม */
         input[type="submit"] {
-            background-color: #42a5f5;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            background-color: #42a5f5; /* ตั้งสีพื้นหลังของปุ่มเป็นสีน้ำเงิน */
+            color: white; /* ตั้งสีตัวอักษรของปุ่มเป็นสีขาว */
+            padding: 12px 25px; /* กำหนดขนาด padding ของปุ่ม */
+            border: none; /* ลบเส้นขอบของปุ่ม */
+            border-radius: 25px; /* ปรับขอบปุ่มให้โค้งมน */
+            cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นแบบมือเมื่อโฟกัสที่ปุ่ม */
+            font-size: 16px; /* ตั้งขนาดตัวอักษร */
+            margin-top: 15px; /* เพิ่มช่องว่างด้านบนของปุ่ม */
+            transition: background-color 0.3s, box-shadow 0.3s; /* เพิ่ม transition เมื่อ hover ปุ่ม */
         }
 
-        /* ปุ่มไปหน้า dataset */
+        /* ตกแต่งปุ่มลิงก์ไปหน้า dataset */
         .dataset-btn {
-            background-color: #42a5f5;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            text-decoration: none;
+            background-color: #42a5f5; /* ตั้งสีพื้นหลังของปุ่มลิงก์เป็นสีน้ำเงิน */
+            color: white; /* ตั้งสีตัวอักษรเป็นสีขาว */
+            padding: 12px 25px; /* กำหนด padding ของปุ่ม */
+            border: none; /* ลบเส้นขอบ */
+            border-radius: 25px; /* ปรับขอบปุ่มให้โค้งมน */
+            cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นมือเมื่อโฟกัสที่ปุ่ม */
+            font-size: 16px; /* ตั้งขนาดตัวอักษร */
+            margin-top: 15px; /* เพิ่มช่องว่างด้านบนของปุ่ม */
+            transition: background-color 0.3s, box-shadow 0.3s; /* เพิ่ม transition เมื่อ hover */
+            text-decoration: none; /* ลบขีดเส้นใต้ของลิงก์ */
         }
 
         /* เปลี่ยนสีปุ่มเมื่อ hover */
         input[type="submit"]:hover, .dataset-btn:hover {
-            background-color: #87e078;
-            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+            background-color: #87e078; /* เปลี่ยนสีพื้นหลังเป็นสีเขียวเมื่อ hover */
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4); /* เพิ่มเงาเมื่อ hover */
         }
 
-        /* ผลลัพธ์การพยากรณ์ */
+        /* ตกแต่งกล่องผลลัพธ์การทำนาย */
         .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e0f7fa;
-            color: #006064;
-            border: 2px solid #006064;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 18px;
-            transition: background-color 0.3s;
+            margin-top: 20px; /* เพิ่มช่องว่างด้านบน */
+            padding: 15px; /* เพิ่ม padding ภายในกล่อง */
+            background-color: #e0f7fa; /* ตั้งสีพื้นหลังของกล่องผลลัพธ์ */
+            color: #006064; /* ตั้งสีตัวอักษรของผลลัพธ์ */
+            border: 2px solid #006064; /* กำหนดขอบกล่องเป็นสีน้ำเงินเข้ม */
+            border-radius: 8px; /* ปรับขอบกล่องให้โค้งมน */
+            font-weight: bold; /* ทำตัวอักษรหนา */
+            font-size: 18px; /* ตั้งขนาดตัวอักษร */
+            transition: background-color 0.3s; /* เพิ่ม transition เมื่อเปลี่ยนสีพื้นหลัง */
         }
 
-        /* ปรับแต่งเพิ่มเติมเพื่อการตอบสนอง (Responsive Design) */
+        /* การออกแบบให้ตอบสนองต่อหน้าจอขนาดเล็ก (Responsive Design) */
         @media (max-width: 600px) {
             .container {
-                padding: 20px;
+                padding: 20px; /* ลด padding ของ container */
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 24px; /* ลดขนาดตัวอักษรของหัวข้อ */
             }
 
             input[type="text"] {
-                font-size: 14px;
+                font-size: 14px; /* ลดขนาดตัวอักษรในช่องกรอกข้อมูล */
             }
 
             input[type="submit"] {
-                font-size: 14px;
-                padding: 10px 20px;
+                font-size: 14px; /* ลดขนาดตัวอักษรของปุ่ม */
+                padding: 10px 20px; /* ลดขนาด padding ของปุ่ม */
             }
 
             .result {
-                font-size: 16px;
+                font-size: 16px; /* ลดขนาดตัวอักษรของผลลัพธ์ */
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- ส่วนหลักของหน้า -->
     <div class="container">
+        <!-- หัวข้อของหน้า -->
         <h1>Diabetes Prediction</h1>
+
+        <!-- ฟอร์มสำหรับการกรอกข้อมูล -->
         <form action="/predict" method="POST">
+            <!-- ช่องกรอกข้อมูลสำหรับจำนวนการตั้งครรภ์ -->
             <input type="text" name="pregnancies" placeholder="Number of Pregnancies">
+            <!-- ช่องกรอกข้อมูลสำหรับระดับน้ำตาล -->
             <input type="text" name="glucose" placeholder="Glucose Level">
+            <!-- ช่องกรอกข้อมูลสำหรับความดันโลหิต -->
             <input type="text" name="blood_pressure" placeholder="Blood Pressure">
+            <!-- ช่องกรอกข้อมูลสำหรับความหนาของผิวหนัง -->
             <input type="text" name="skin_thickness" placeholder="Skin Thickness">
+            <!-- ช่องกรอกข้อมูลสำหรับระดับอินซูลิน -->
             <input type="text" name="insulin" placeholder="Insulin Level">
+            <!-- ช่องกรอกข้อมูลสำหรับ BMI -->
             <input type="text" name="bmi" placeholder="BMI">
+            <!-- ช่องกรอกข้อมูลสำหรับค่าฟังก์ชันสืบทอดทางพันธุกรรมของเบาหวาน -->
             <input type="text" name="diabetes_pedigree_function" placeholder="Diabetes Pedigree Function">
+            <!-- ช่องกรอกข้อมูลสำหรับอายุ -->
             <input type="text" name="age" placeholder="Age">
+            <!-- ปุ่มสำหรับส่งฟอร์ม -->
             <input type="submit" value="Predict">
         </form>
+
         <br>
+        <!-- ปุ่มสำหรับไปยังหน้า dataset -->
         <a href="/dataset" class="dataset-btn">View Dataset</a>
 
+        <!-- แสดงผลการพยากรณ์ถ้ามีการพยากรณ์ -->
         {% if prediction_text %}
         <div class="result">
-            {{ prediction_text }}
+            {{ prediction_text }} <!-- แสดงผลการทำนายที่ได้จาก backend -->
         </div>
         {% endif %}
     </div>
