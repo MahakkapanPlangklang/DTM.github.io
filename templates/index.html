@@ -1,23 +1,149 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes Prediction</title>
+    <style>
+        /* ตกแต่งพื้นหลัง */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #42a5f5 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+        }
+
+        /* ตกแต่งกล่องฟอร์ม */
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px; /* กำหนดความกว้างสูงสุด */
+            text-align: center;
+            border: 3px solid #42a5f5;
+        }
+
+        /* ตกแต่งหัวข้อ */
+        h1 {
+            color: #42a5f5;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* การจัดการฟอร์ม */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ช่องกรอกข้อมูล */
+        input[type="text"] {
+            width: 100%;
+            max-width: 400px; /* จำกัดความกว้างของช่องกรอกข้อมูล */
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid #bbb;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* เปลี่ยนสีเส้นขอบเมื่อโฟกัส */
+        input[type="text"]:focus {
+            border-color: #42a5f5;
+            box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
+        }
+
+        /* ปุ่มกด */
+        input[type="submit"] {
+            background-color: #42a5f5;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* เปลี่ยนสีปุ่มเมื่อ hover */
+        input[type="submit"]:hover {
+            background-color: #e91e63;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        /* ผลลัพธ์การพยากรณ์ */
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            color: #006064;
+            border: 2px solid #006064;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        /* ปรับแต่งเพิ่มเติมเพื่อการตอบสนอง (Responsive Design) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input[type="text"] {
+                font-size: 14px;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .result {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Diabetes Prediction Form</h1>
-    <form action="/predict" method="POST">
-        Cholesterol: <input type="text" name="chol"><br>
-        Stable Glucose Level: <input type="text" name="stab_glu"><br>
-        HDL: <input type="text" name="hdl"><br>
-        GlyHb (HbA1c): <input type="text" name="glyhb"><br>
-        Age: <input type="text" name="age"><br>
-        <input type="submit" value="Predict">
-    </form>
-    {% if prediction_text %}
-    <h2>{{ prediction_text }}</h2>
-    {% endif %}
+    <div class="container">
+        <h1>Diabetes Prediction</h1>
+        <form action="/predict" method="POST">
+            <input type="text" name="pregnancies" placeholder="Number of Pregnancies">
+            <input type="text" name="glucose" placeholder="Glucose Level">
+            <input type="text" name="blood_pressure" placeholder="Blood Pressure">
+            <input type="text" name="skin_thickness" placeholder="Skin Thickness">
+            <input type="text" name="insulin" placeholder="Insulin Level">
+            <input type="text" name="bmi" placeholder="BMI">
+            <input type="text" name="diabetes_pedigree_function" placeholder="Diabetes Pedigree Function">
+            <input type="text" name="age" placeholder="Age">
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
 </body>
+
 </html>

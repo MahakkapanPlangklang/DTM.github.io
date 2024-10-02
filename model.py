@@ -3,14 +3,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import pickle
 
-# โหลดข้อมูลจากไฟล์ CSV
+# โหลดข้อมูลจากไฟล์ CSV ที่มีฟีเจอร์ใหม่
 data = pd.read_csv('diabetes.csv')
 
-# สร้างคอลัมน์ Outcome โดยใช้เงื่อนไขจาก glyhb (เป็นเบาหวานถ้า glyhb > 6.5)
-data['Outcome'] = data['glyhb'].apply(lambda x: 1 if x > 6.5 else 0)
-
-# เลือก 5 ฟีเจอร์ที่ต้องการใช้ในการทำนาย
-X = data[['chol', 'stab.glu', 'hdl', 'glyhb', 'age']]
+# เลือกฟีเจอร์ที่ต้องการใช้ในการทำนาย
+X = data[['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']]
 y = data['Outcome']
 
 # แยกข้อมูลฝึกและทดสอบ
