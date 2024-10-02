@@ -1,13 +1,11 @@
-# app.py
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 
 app = Flask(__name__)
 
-# โหลดโมเดลและ Label Encoders ที่บันทึกไว้
+# โหลดโมเดล
 model = pickle.load(open('model.pkl', 'rb'))
-label_encoders = pickle.load(open('label_encoders.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -16,25 +14,26 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     # รับข้อมูลจากฟอร์ม
-    age = request.form['age']
-    workclass = request.form['workclass']
-    education = request.form['education']
-    hours_per_week = request.form['hours_per_week']
-    native_country = request.form['native_country']
-
-    # ใช้ LabelEncoder เพื่อแปลงข้อมูลข้อความเป็นตัวเลข
-    workclass = label_encoders['workclass'].transform([workclass])[0]
-    education = label_encoders['education'].transform([education])[0]
-    native_country = label_encoders['native_country'].transform([native_country])[0]
+    chol = request.form.get('chol', None)
+    stab_glu = request.form.get('stab_glu', None)
+    hdl = request.form.get('hdl', None)
+    glyhb = request.form.get('glyhb', None)
+    age = request.form.get('age', None)
+    
+    # ตรวจสอบว่ากรอกข้อมูลครบหรือไม่
+    if not chol or not stab_glu or not hdl or not glyhb or not age:
+        return render_template('index.html', prediction_text="Error: Please fill all fields")
 
     # สร้าง DataFrame สำหรับการทำนาย
-    input_data = pd.DataFrame([[age, workclass, education, hours_per_week, native_country]],
-                              columns=['age', 'workclass', 'education', 'hours_per_week', 'native_country'])
+    input_data = pd.DataFrame([[chol, stab_glu, hdl, glyhb, age]],
+                              columns=['chol', 'stab.glu', 'hdl', 'glyhb', 'age'])
 
     # ทำการทำนาย
     prediction = model.predict(input_data)[0]
 
-    return render_template('index.html', prediction_text=f'Predicted Income: {prediction}')
+    # แสดงผลการพยากรณ์
+    result = 'Diabetic' if prediction == 1 else 'Non-Diabetic'
+    return render_template('index.html', prediction_text=f'Predicted Result: {result}')
 
 if __name__ == '__main__':
     app.run(debug=True)

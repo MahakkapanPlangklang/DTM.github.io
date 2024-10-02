@@ -1,0 +1,23 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+</head>
+<body>
+    <h1>Diabetes Prediction Form</h1>
+    <form action="/predict" method="POST">
+        Cholesterol: <input type="text" name="chol"><br>
+        Stable Glucose Level: <input type="text" name="stab_glu"><br>
+        HDL: <input type="text" name="hdl"><br>
+        GlyHb (HbA1c): <input type="text" name="glyhb"><br>
+        Age: <input type="text" name="age"><br>
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction_text %}
+    <h2>{{ prediction_text }}</h2>
+    {% endif %}
+</body>
+</html>

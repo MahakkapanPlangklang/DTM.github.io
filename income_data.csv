@@ -1,6 +1,0 @@
-age,workclass,education,hours_per_week,native_country,income
-25,Private,HS-grad,40,United-States,<=50K
-45,Federal-gov,Bachelors,50,United-States,>50K
-35,Private,HS-grad,60,Canada,<=50K
-29,Private,Masters,55,United-States,>50K
-50,Self-emp,Doctorate,45,United-States,>50K
